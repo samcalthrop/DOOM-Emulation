@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float playerSpeed = 10f;
+    public float playerSpeed = 12f;
     public float momentumDamping = 1f;
 
     private CharacterController cc;
