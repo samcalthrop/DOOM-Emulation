@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth;
     private int health;
 
-    public int maxArmour = 50;
+    public int maxArmour;
     private int armour;
 
     void Start()
     {
         health = maxHealth;
-        armour = maxArmour;
     }
 
     void Update()
@@ -52,6 +51,34 @@ public class PlayerHealth : MonoBehaviour
 
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.buildIndex);
+        }
+    }
+
+    public void GiveHealth(int amount, GameObject pickup)
+    {
+        if (health < maxHealth)
+        {
+            health += amount;
+            Destroy(pickup);
+        }
+
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
+
+    public void GiveArmour(int amount, GameObject pickup)
+    {
+        if (armour < maxArmour)
+        {
+            armour += amount;
+            Destroy(pickup);
+        }
+
+        if (armour > maxArmour)
+        {
+            armour = maxArmour;
         }
     }
 }

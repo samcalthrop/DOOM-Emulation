@@ -10,8 +10,11 @@ public class Gun : MonoBehaviour
     public float smallDamage = 1f;
     public float gunShotRadius = 20f;
     
-    public float fireRate = 1f;
+    public float fireRate;
     private float nextTimetoFire;
+
+    public int maxAmmo;
+    private int ammo;
 
     private BoxCollider gunTrigger;
     public EnemyManager enemyManager;
@@ -28,7 +31,7 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time > nextTimetoFire)
+        if (Input.GetMouseButtonDown(0) && Time.time > nextTimetoFire && ammo > 0)
         {
             Fire();
         }
@@ -80,6 +83,22 @@ public class Gun : MonoBehaviour
 
         // reset timer
         nextTimetoFire = Time.time + fireRate;
+
+        ammo--;
+    }
+
+    public void GiveAmmo(int amount, GameObject pickup)
+    {
+        if (ammo < maxAmmo)
+        {
+            ammo += amount;
+            Destroy(pickup);
+        }
+
+        if (ammo > maxAmmo)
+        {
+            ammo = maxAmmo;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

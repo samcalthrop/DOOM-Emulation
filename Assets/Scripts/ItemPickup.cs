@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
+    public bool isHealth;
+    public bool isArmour;
+    public bool isAmmo;
+
+    public int amount;
+
     void Start()
     {
         
@@ -18,7 +24,18 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            if (isHealth)
+            {
+                other.GetComponent<PlayerHealth>().GiveHealth(amount, this.gameObject);
+            }
+            if (isArmour)
+            {
+                other.GetComponent<PlayerHealth>().GiveArmour(amount, this.gameObject);
+            }
+            if (isAmmo)
+            {
+                other.GetComponentInChildren<Gun>().GiveAmmo(amount, this.gameObject);  
+            }
         }
     }
 }
