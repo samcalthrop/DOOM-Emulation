@@ -24,6 +24,7 @@ public class Gun : MonoBehaviour
 
     void Start()
     {
+        ammo = maxAmmo;
         gunTrigger = GetComponent<BoxCollider>();
         gunTrigger.size = new Vector3(1, verticalRange, range);
         gunTrigger.center = new Vector3(0, 0, range * .5f);
